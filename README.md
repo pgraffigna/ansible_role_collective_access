@@ -1,0 +1,1 @@
+# ansible_role_collective_access
