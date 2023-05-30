@@ -1,0 +1,2 @@
+---
+collective_packages: [ 'git', 'ghostscript', 'libgraphicsmagick1-dev', 'libpoppler-dev', 'poppler-utils', 'dcraw', 'redis-server', 'ffmpeg', 'libimage-exiftool-perl', 'libreoffice', 'mediainfo' ]

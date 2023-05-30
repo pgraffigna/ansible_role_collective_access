@@ -1,0 +1,19 @@
+---
+# mariadb
+mysql_root_password: "mysql_root_password"
+mysql_db: "collective_db"
+mysql_user: "collective_user"
+mysql_password: "collective_pass"
+
+# apache
+http_port: "80"
+https_port: "443"
+apache_user: www-data
+apache_group: www-data
+
+# php
+php_config: "php.ini"
+
+# collective
+git_repo: https://github.com/collectiveaccess/providence.git
+collective_config: "setup.php"

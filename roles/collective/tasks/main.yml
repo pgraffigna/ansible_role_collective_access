@@ -1,0 +1,34 @@
+---
+- include_vars: ../../vars_main.yml
+
+- name: instalando dependencias
+  apt:
+    name: "{{ item }}"
+    update_cache: true
+    cache_valid_time: 3600
+  with_items: "{{ collective_packages }}"
+
+- name: clonando proyecto
+  git:
+    repo: "{{ git_repo }}"
+    dest: /var/www/html/ca
+
+- name: creando directorio tmp
+  file:
+    path: /var/www/html/ca/app/tmp
+    state: directory
+
+- name: cambiando permisos directorio collective
+  file:
+    path: /var/www/html/ca
+    state: directory
+    recurse: yes
+    owner: "{{ apache_user }}"
+    group: "{{ apache_group }}"
+    mode: '0755'
+
+- name: copiando archivos de configuración
+  template:
+    src: "files/{{ collective_config }}.j2"
+    dest: "/var/www/html/ca/{{ collective_config }}"
+  notify: reiniciar_apache   
