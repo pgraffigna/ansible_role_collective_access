@@ -1,0 +1,17 @@
+# crear carpeta custom para subidas
+mkdir -p /var/www/html/cultura/media/collectiveaccess/{images,tilepics,flv,mp3,quicktime,swf,windowsmedia,workspace}
+
+# permisos para www-data
+sudo chown -R www-data:www-data cultura
+sudo chmod -R 755 cultura/
+
+# /app/conf/global.conf
+# This is to take care of the possible differences between the name of the directory
+# path and the URL path due to web server aliases being in play.
+ca_media_url_root = /cultura/media/<app_name>
+ca_media_root_dir = /var/www/html/cultura/media/<app_name>
+
+# reiniciando servicio
+sudo systemctl restart apache2.service
+
+
