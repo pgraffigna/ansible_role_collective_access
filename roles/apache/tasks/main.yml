@@ -1,22 +1,19 @@
 ---
-- include_vars: ../../vars_main.yml
+- name: Incluye el archivo con las variables
+  ansible.builtin.include_vars:
+    file: vars_main.yml
 
 - name: instalando Apache
-  apt:
+  ansible.builtin.apt:
     name: "{{ item }}"
     update_cache: true
     cache_valid_time: 3600
-  with_items: "{{ apache_packages }}"
+  with_items: 
+    - "{{ apache_packages }}"
+    - "{{ php_packages }}"
 
-- name: instalando módulos PHP
-  apt:
-    name: "{{ item }}"
-    update_cache: true
-    cache_valid_time: 3600
-  with_items: "{{ php_packages }}"
-  
 - name: copiando archivos de configuración
-  template:
+  ansible.builtin.template:
     src: "files/{{ php_config }}.j2"
     dest: "/etc/php/7.4/apache2/{{ php_config }}"
 

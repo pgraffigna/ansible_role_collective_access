@@ -17,3 +17,4 @@ php_config: "php.ini"
 # collective
 git_repo: https://github.com/collectiveaccess/providence.git
 collective_config: "setup.php"
+collective_path: "/var/www/html/ca"

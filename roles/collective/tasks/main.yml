@@ -1,26 +1,28 @@
 ---
-- include_vars: ../../vars_main.yml
+- name: Incluye el archivo con las variables
+  ansible.builtin.include_vars:
+    file: vars_main.yml
 
 - name: instalando dependencias
-  apt:
+  ansible.builtin.apt:
     name: "{{ item }}"
     update_cache: true
     cache_valid_time: 3600
   with_items: "{{ collective_packages }}"
 
 - name: clonando proyecto
-  git:
+  ansible.builtin.git:
     repo: "{{ git_repo }}"
-    dest: /var/www/html/ca
+    dest: "{{ collective_path }}"
 
 - name: creando directorio tmp
-  file:
-    path: /var/www/html/ca/app/tmp
+  ansible.builtin.file:
+    path: "{{ collective_path }}/app/tmp"
     state: directory
 
 - name: cambiando permisos directorio collective
-  file:
-    path: /var/www/html/ca
+  ansible.builtin.file:
+    path: "{{ collective_path }}"
     state: directory
     recurse: yes
     owner: "{{ apache_user }}"
@@ -28,7 +30,7 @@
     mode: '0755'
 
 - name: copiando archivos de configuración
-  template:
+  ansible.builtin.template:
     src: "files/{{ collective_config }}.j2"
-    dest: "/var/www/html/ca/{{ collective_config }}"
+    dest: "{{ collective_path  }}/{{ collective_config }}"
   notify: reiniciar_apache   

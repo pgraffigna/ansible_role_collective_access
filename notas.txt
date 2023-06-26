@@ -2,7 +2,7 @@
 mkdir -p /var/www/html/cultura/media/collectiveaccess/{images,tilepics,flv,mp3,quicktime,swf,windowsmedia,workspace}
 
 # permisos para www-data
-sudo chown -R www-data:www-data cultura
+sudo chown -R www-data:www-data cultura/
 sudo chmod -R 755 cultura/
 
 # /app/conf/global.conf
