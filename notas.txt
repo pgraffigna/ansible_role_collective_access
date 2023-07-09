@@ -1,13 +1,14 @@
-# crear carpeta custom para subidas
+# s3 en collectiveaccess
+# crear carpeta para subidas
+mkdir -p /var/www/html/cultura
+
+# montar bucket en carpeta para subidas
+sudo s3fs bucket-15 /var/www/html/cultura -o allow_other,uid=$(id -u www-data),gid=$(id -g www-data),umask=0022,passwd_file=/etc/passwd-s3fs,url=https://s3.host.com.ar/,use_path_request_style
+
+# crear carpetas personalizadas para collectiveaccess
 mkdir -p /var/www/html/cultura/media/collectiveaccess/{images,tilepics,flv,mp3,quicktime,swf,windowsmedia,workspace}
 
-# permisos para www-data
-sudo chown -R www-data:www-data cultura/
-sudo chmod -R 755 cultura/
-
 # /app/conf/global.conf
-# This is to take care of the possible differences between the name of the directory
-# path and the URL path due to web server aliases being in play.
 ca_media_url_root = /cultura/media/<app_name>
 ca_media_root_dir = /var/www/html/cultura/media/<app_name>
 
